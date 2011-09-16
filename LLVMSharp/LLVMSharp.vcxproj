@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{39FBC6B1-C551-4EA0-9F2D-E03F03C4CA34}</ProjectGuid>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>LLVMSharp</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>LLVMJIT.lib;LLVMX86CodeGen.lib;LLVMX86AsmParser.lib;LLVMX86Disassembler.lib;LLVMExecutionEngine.lib;LLVMAsmPrinter.lib;LLVMSelectionDAG.lib;LLVMX86AsmPrinter.lib;LLVMX86Info.lib;LLVMMCParser.lib;LLVMCodeGen.lib;LLVMX86Utils.lib;LLVMScalarOpts.lib;LLVMInstCombine.lib;LLVMTransformUtils.lib;LLVMipa.lib;LLVMAnalysis.lib;LLVMTarget.lib;LLVMCore.lib;LLVMMC.lib;LLVMSupport.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>LLVMJIT.lib;LLVMX86CodeGen.lib;LLVMX86AsmParser.lib;LLVMX86Disassembler.lib;LLVMExecutionEngine.lib;LLVMAsmPrinter.lib;LLVMSelectionDAG.lib;LLVMX86AsmPrinter.lib;LLVMX86Info.lib;LLVMMCParser.lib;LLVMCodeGen.lib;LLVMX86Utils.lib;LLVMScalarOpts.lib;LLVMInstCombine.lib;LLVMTransformUtils.lib;LLVMipa.lib;LLVMAnalysis.lib;LLVMTarget.lib;LLVMCore.lib;LLVMMC.lib;LLVMSupport.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="BasicBlock.cpp" />
+    <ClCompile Include="CallInstruction.cpp" />
+    <ClCompile Include="Constant.cpp" />
+    <ClCompile Include="Function.cpp" />
+    <ClCompile Include="FunctionType.cpp" />
+    <ClCompile Include="GlobalValue.cpp" />
+    <ClCompile Include="GlobalVariable.cpp" />
+    <ClCompile Include="Instruction.cpp" />
+    <ClCompile Include="IntegerType.cpp" />
+    <ClCompile Include="Interop.cpp" />
+    <ClCompile Include="Intrinsic.cpp" />
+    <ClCompile Include="IRBuilder.cpp" />
+    <ClCompile Include="LLVMContext.cpp" />
+    <ClCompile Include="LoadInstruction.cpp" />
+    <ClCompile Include="Module.cpp" />
+    <ClCompile Include="PointerType.cpp" />
+    <ClCompile Include="ReturnInstruction.cpp" />
+    <ClCompile Include="Type.cpp" />
+    <ClCompile Include="Value.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BasicBlock.h" />
+    <ClInclude Include="CallInstruction.h" />
+    <ClInclude Include="Constant.h" />
+    <ClInclude Include="Function.h" />
+    <ClInclude Include="FunctionType.h" />
+    <ClInclude Include="GlobalValue.h" />
+    <ClInclude Include="GlobalVariable.h" />
+    <ClInclude Include="Instruction.h" />
+    <ClInclude Include="IntegerType.h" />
+    <ClInclude Include="Interop.h" />
+    <ClInclude Include="Intrinsic.h" />
+    <ClInclude Include="IntrinsicType.h" />
+    <ClInclude Include="IRBuilder.h" />
+    <ClInclude Include="LinkageType.h" />
+    <ClInclude Include="LLVM.h" />
+    <ClInclude Include="LLVMContext.h" />
+    <ClInclude Include="LoadInstruction.h" />
+    <ClInclude Include="Module.h" />
+    <ClInclude Include="PointerType.h" />
+    <ClInclude Include="ReturnInstruction.h" />
+    <ClInclude Include="Type.h" />
+    <ClInclude Include="Value.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

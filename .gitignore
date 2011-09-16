@@ -1,0 +1,12 @@
+*.exe
+*.dll
+*.zip
+/Debug
+/Release
+obj/
+*.vsmdi
+*.testsettings
+*.suo
+*.cachefile
+*.vspscc
+*.vssscc
