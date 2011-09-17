@@ -57,83 +57,13 @@ namespace Example1
         #region Parse
         public void Parse(String filename, UInt64 memory)
         {
-            this.Parse(File.Open(filename, FileMode.Open, FileAccess.Read), memory);
-        }
-        public void Parse(Stream stream, UInt64 memory)
-        {
             this.totalMemory = memory;
-            this.reader = new StreamReader(stream);
+            this.reader = new StreamReader(File.Open(filename, FileMode.Open));
 
             this.GenerateHeader();
-
-            // parse the input file and generate code for it
-            Symbol currentSymbol = Symbol.None;
-            Symbol nextSymbol = Symbol.None;
-            UInt64 currentValue = 0, nextValue = 0;
-            Char c;
-
-            while (currentSymbol != Symbol.EOF && currentSymbol != Symbol.EndLoop)
-            {
-                switch (currentSymbol)
-                {
-                    case Symbol.None:
-                        break;
-                    case Symbol.Read:
-                        {
-                            CallInstruction getCharCall = this.builder.CreateCall(this.getcharFunction, "tape");
-                            getCharCall.TailCall = false;
-
-                            Value tape0 = (Value)getCharCall;
-                            Value tape1 = this.builder.CreateTrunc(null, Type.GetInteger8Type(this.context), "tape");
-                            builder.CreateStore(tape1, this.currentHead);
-                        }
-                        break;
-                    case Symbol.Write:
-                        {
-                            LoadInstruction tape0 = this.builder.CreateLoad(this.currentHead, "tape");
-                            Value tape1 = this.builder.CreateSignExtend(tape0, Type.GetInteger32Type(this.context), "tape");
-                            CallInstruction putcharCall = this.builder.CreateCall(this.putcharFunction, tape1);
-                            putcharCall.TailCall = false;
-                        }
-                        break;
-                    case Symbol.Move:
-                        this.currentHead = this.builder.CreateGEP(
-                            this.currentHead,
-                            new Constant(this.context, 32, currentValue),
-                            "head");
-                        break;
-                    case Symbol.Change:
-                        {
-                            LoadInstruction tape0 = this.builder.CreateLoad(this.currentHead, "tape");
-                            Value tape1 = this.builder.CreateAdd(tape0, new Constant(this.context, 8, currentValue), "tape");
-                            this.builder.CreateStore(tape1, this.currentHead);
-                        }
-                        break;
-                    case Symbol.Loop:
-                        BasicBlock testbb = new BasicBlock(this.context, this.brainfFunction, "brainf");
-                        this.builder.CreateBranch(testbb);
-
-                        BasicBlock bb0 = this.builder.GetInsertBlock();
-                        BasicBlock bb1 = new BasicBlock(this.context, this.brainfFunction, "brainf");
-                        //this.builder.SetInsertPoint(bb1);
-
-                        //PHINode phi0 ...
-                        break;
-                    default:
-                        throw new Exception("Unknown symbol.");
-                }
-
-                currentSymbol = nextSymbol;
-                currentValue = nextValue;
-                nextSymbol = Symbol.None;
-
-                while (currentSymbol == Symbol.None || 
-                    currentSymbol == Symbol.Move || 
-                    currentSymbol == Symbol.Change)
-                {
-                    c = (Char)this.reader.Read();
-                }
-            }
+            this.ReadLoop(null, null, null);
+            this.AddMainFunction();
+            this.module.WriteToFile("out.bc");
         }
         #endregion
 
@@ -195,6 +125,239 @@ namespace Example1
             this.endBlock.PushBack(CallInstruction.CreateFree(pointerArray, this.endBlock));
 
             ReturnInstruction.Create(this.context, this.endBlock);
+        }
+        #endregion
+
+        #region ReadLoop
+        private void ReadLoop(PHINode phi, BasicBlock oldBlock, BasicBlock testBlock)
+        {
+            // parse the input file and generate code for it
+            Symbol currentSymbol = Symbol.None;
+            Symbol nextSymbol = Symbol.None;
+            Int32 currentValue = 0, nextValue = 0;
+            Char c;
+            Int32 direction;
+
+            while (currentSymbol != Symbol.EOF && currentSymbol != Symbol.EndLoop)
+            {
+                switch (currentSymbol)
+                {
+                    case Symbol.None:
+                        break;
+                    case Symbol.Read:
+                        {
+                            CallInstruction getCharCall = this.builder.CreateCall(this.getcharFunction, "tape");
+                            getCharCall.TailCall = false;
+
+                            Value tape0 = (Value)getCharCall;
+                            Value tape1 = this.builder.CreateTrunc(tape0, Type.GetInteger8Type(this.context), "tape");
+                            builder.CreateStore(tape1, this.currentHead);
+                        }
+                        break;
+                    case Symbol.Write:
+                        {
+                            LoadInstruction tape0 = this.builder.CreateLoad(this.currentHead, "tape");
+                            Value tape1 = this.builder.CreateSignExtend(tape0, Type.GetInteger32Type(this.context), "tape");
+                            CallInstruction putcharCall = this.builder.CreateCall(this.putcharFunction, tape1);
+                            putcharCall.TailCall = false;
+                        }
+                        break;
+                    case Symbol.Move:
+                        this.currentHead = this.builder.CreateGEP(
+                            this.currentHead,
+                            new Constant(this.context, 32, (UInt64)currentValue),
+                            "head");
+                        break;
+                    case Symbol.Change:
+                        {
+                            LoadInstruction tape0 = this.builder.CreateLoad(this.currentHead, "tape");
+                            Value tape1 = this.builder.CreateAdd(tape0, new Constant(this.context, 8, (UInt64)currentValue), "tape");
+                            this.builder.CreateStore(tape1, this.currentHead);
+                        }
+                        break;
+                    case Symbol.Loop:
+                        BasicBlock testbb = new BasicBlock(this.context, this.brainfFunction, "brainf");
+                        this.builder.CreateBranch(testbb);
+
+                        BasicBlock bb0 = this.builder.GetInsertBlock();
+                        BasicBlock bb1 = new BasicBlock(this.context, this.brainfFunction, "brainf");
+                        this.builder.SetInsertPoint(bb1);
+
+                        PHINode phi0 = new PHINode(PointerType.GetUnqualified(Type.GetInteger8Type(this.context)), "head", testbb);
+                        phi0.ReserveOperandSpace(2);
+                        phi0.AddIncomding(this.currentHead, bb0);
+                        this.currentHead = phi0;
+
+                        this.ReadLoop(phi0, bb1, testbb);
+
+                        break;
+                    default:
+                        throw new Exception("Unknown symbol.");
+                }
+
+                currentSymbol = nextSymbol;
+                currentValue = nextValue;
+                nextSymbol = Symbol.None;
+
+                bool loop = currentSymbol == Symbol.None ||
+                    currentSymbol == Symbol.Move ||
+                    currentSymbol == Symbol.Change;
+
+                while (loop)
+                {
+                    if (this.reader.EndOfStream)
+                    {
+                        if (currentSymbol == Symbol.None) currentSymbol = Symbol.EOF;
+                        else nextSymbol = Symbol.EOF;
+
+                        loop = false;
+                    }
+                    else
+                    {
+                        c = (Char)this.reader.Read();
+                        direction = 1;
+
+                        switch (c)
+                        {
+                            case '-':
+                                direction = -1;
+                                goto case '+';
+                            case '+':
+                                if (currentSymbol == Symbol.Change)
+                                {
+                                    currentValue += direction;
+                                }
+                                else
+                                {
+                                    if (currentSymbol == Symbol.None)
+                                    {
+                                        currentSymbol = Symbol.Change;
+                                        currentValue = direction;
+                                    }
+                                    else
+                                    {
+                                        nextSymbol = Symbol.Change;
+                                        nextValue = direction;
+                                        loop = false;
+                                    }
+                                }
+                                break;
+                            case '<':
+                                direction = -1;
+                                goto case '>';
+                            case '>':
+                                if (currentSymbol == Symbol.Move)
+                                {
+                                    currentValue += direction;
+                                }
+                                else
+                                {
+                                    if (currentSymbol == Symbol.None)
+                                    {
+                                        currentSymbol = Symbol.Move;
+                                        currentValue = direction;
+                                    }
+                                    else
+                                    {
+                                        nextSymbol = Symbol.Move;
+                                        nextValue = direction;
+                                        loop = false;
+                                    }
+                                }
+                                break;
+                            case ',':
+                                if (currentSymbol == Symbol.None)
+                                    currentSymbol = Symbol.Read;
+                                else
+                                    nextSymbol = Symbol.Read;
+                                loop = false;
+                                break;
+                            case '.':
+                                if (currentSymbol == Symbol.None)
+                                    currentSymbol = Symbol.Write;
+                                else
+                                    nextSymbol = Symbol.Write;
+                                loop = false;
+                                break;
+                            case '[':
+                                if (currentSymbol == Symbol.None)
+                                    currentSymbol = Symbol.Loop;
+                                else
+                                    nextSymbol = Symbol.Loop;
+                                loop = false;
+                                break;
+                            case ']':
+                                if (currentSymbol == Symbol.None)
+                                    currentSymbol = Symbol.EndLoop;
+                                else
+                                    nextSymbol = Symbol.EndLoop;
+                                loop = false;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+
+            if (currentSymbol == Symbol.EndLoop)
+            {
+                if(phi == null)
+                    throw new Exception("Unexpected ]");
+
+                this.builder.CreateBranch(testBlock);
+
+                phi.AddIncomding(this.currentHead, this.builder.GetInsertBlock());
+                Value head0 = phi;
+
+                LoadInstruction tape0 = new LoadInstruction(head0, "tape", testBlock);
+
+                IntegerCompareInstruction test0 = new IntegerCompareInstruction(
+                    testBlock, Predicate.Equal, tape0, new Constant(this.context, 8, 0), "test");
+
+                BasicBlock bb0 = new BasicBlock(this.context, this.brainfFunction, "brainf");
+                BranchInstruction.Create(bb0, oldBlock, test0, testBlock);
+
+                this.builder.SetInsertPoint(bb0);
+
+                PHINode phi1 = this.builder.CreatePHI(Type.GetInteger8PointerType(this.context), "head");
+                phi1.ReserveOperandSpace(1);
+                phi1.AddIncomding(head0, testBlock);
+
+                this.currentHead = phi1;
+
+                return;
+            }
+
+            this.builder.CreateBranch(this.endBlock);
+
+            if (phi != null)
+                throw new Exception("Missing ]");
+        }
+        #endregion
+
+        #region AddMainFunction
+        /// <summary>
+        /// Adds the main entry point to the BrainF module.
+        /// </summary>
+        private void AddMainFunction()
+        {
+            // create the main function
+            Function mainFunction = (Function)this.module.GetOrInsertFunction("main", new FunctionType(
+                Type.GetInteger32Type(this.context),
+                Type.GetInteger32Type(this.context),
+                PointerType.GetUnqualified(PointerType.GetUnqualified(Type.GetInteger8Type(this.context)))));
+
+            mainFunction.SetArgumentName(0, "argc");
+            mainFunction.SetArgumentName(1, "argv");
+
+            // call the main brainf function
+            BasicBlock bb = new BasicBlock(this.context, mainFunction, "main.0");
+            CallInstruction brainfCall = CallInstruction.Create(this.brainfFunction, "", bb);
+            brainfCall.TailCall = false;
+
+            // return 0
+            ReturnInstruction.Create(this.context, new Constant(this.context, 32, 0), bb);
         }
         #endregion
     }
