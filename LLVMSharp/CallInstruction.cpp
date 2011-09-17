@@ -25,14 +25,24 @@ LLVM::Instruction^ LLVM::CallInstruction::CreateFree(LLVM::Value^ pointer, LLVM:
 		block->GetNativeBlock()));
 }
 
+LLVM::CallInstruction^ LLVM::CallInstruction::Create(LLVM::Value^ target, String^ name, LLVM::BasicBlock^ parent)
+{
+	return gcnew LLVM::CallInstruction(llvm::CallInst::Create(
+		target->GetNativeValue(),
+		ToUnmanagedString(name),
+		parent->GetNativeBlock()));
+}
+
 bool LLVM::CallInstruction::TailCall::get()
 {
-	return this->instruction->isTailCall();
+	llvm::CallInst* inst = (llvm::CallInst*)this->GetNativeInstruction();
+	return inst->isTailCall();
 }
 
 void LLVM::CallInstruction::TailCall::set(bool value)
 {
-	this->instruction->setTailCall(value);
+	llvm::CallInst* inst = (llvm::CallInst*)this->GetNativeInstruction();
+	inst->setTailCall(value);
 }
 
 LLVM::CallInstruction::operator LLVM::CallInstruction^(LLVM::Value^ value)
@@ -43,9 +53,4 @@ LLVM::CallInstruction::operator LLVM::CallInstruction^(LLVM::Value^ value)
 LLVM::CallInstruction::operator LLVM::Value^(LLVM::CallInstruction^ instruction)
 {
 	return gcnew LLVM::Value(instruction->GetNativeInstruction());
-}
-
-llvm::CallInst* LLVM::CallInstruction::GetNativeInstruction()
-{
-	return this->instruction;
 }

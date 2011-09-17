@@ -2,16 +2,17 @@
 #pragma once
 
 #include "LLVM.h"
+#include "Instruction.h"
 
 namespace LLVM
 {
-	public ref class CallInstruction
+	public ref class CallInstruction : Instruction
 	{
-	private:
-		llvm::CallInst* instruction;
 	public:
 		static Instruction^ CreateMalloc(BasicBlock^ block, Type^ t0, Type^ t1, Value^ allocSize, Value^ arraySize, Function^ mallocFunction, String^ name);
 		static Instruction^ CreateFree(Value^ pointer, BasicBlock^ block);
+
+		static CallInstruction^ Create(Value^ target, String^ name, BasicBlock^ parent);
 
 		property bool TailCall
 		{
@@ -22,7 +23,6 @@ namespace LLVM
 		static explicit operator CallInstruction^ (Value^ constant);
 		static operator Value^ (CallInstruction^ function);
 	internal:
-		CallInstruction(llvm::CallInst* instruction) : instruction(instruction) { };
-		llvm::CallInst* GetNativeInstruction();
+		CallInstruction(llvm::CallInst* instruction) : Instruction(instruction) { };
 	};
 }

@@ -5,6 +5,7 @@
 #include "Type.h"
 #include "LoadInstruction.h"
 #include "CallInstruction.h"
+#include "PHINode.h"
 
 LLVM::IRBuilder::IRBuilder(LLVM::BasicBlock^ block)
 {
@@ -14,6 +15,11 @@ LLVM::IRBuilder::IRBuilder(LLVM::BasicBlock^ block)
 LLVM::BasicBlock^ LLVM::IRBuilder::GetInsertBlock()
 {
 	return gcnew LLVM::BasicBlock(this->builder->GetInsertBlock());
+}
+
+void LLVM::IRBuilder::SetInsertPoint(LLVM::BasicBlock^ block)
+{
+	this->builder->SetInsertPoint(block->GetNativeBlock());
 }
 
 LLVM::LoadInstruction^ LLVM::IRBuilder::CreateLoad(LLVM::Value^ pointer, String^ name)
@@ -94,4 +100,11 @@ LLVM::CallInstruction^ LLVM::IRBuilder::CreateCall(LLVM::Value^ target, ...array
 		target->GetNativeValue(),
 		args,
 		args + arguments->Length));
+}
+
+LLVM::PHINode^ LLVM::IRBuilder::CreatePHI(LLVM::Type^ type, String^ name)
+{
+	return gcnew LLVM::PHINode(this->builder->CreatePHI(
+		type->GetNativeType(),
+		ToUnmanagedString(name)));
 }

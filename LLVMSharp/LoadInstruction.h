@@ -10,6 +10,8 @@ namespace LLVM
 	private:
 		llvm::LoadInst* instruction;
 	public:
+		LoadInstruction(Value^ value, String^ name, BasicBlock^ parent);
+
 		static explicit operator LoadInstruction^ (Value^ constant);
 		static operator Value^ (LoadInstruction^ function);
 	internal:

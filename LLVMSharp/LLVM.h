@@ -6,12 +6,15 @@
 #include "llvm/Instructions.h"
 #include "llvm/Intrinsics.h"
 #include "llvm/Module.h"
+#include "llvm/Bitcode/ReaderWriter.h"
 #include "llvm/Support/IRBuilder.h"
+#include "llvm/Support/raw_ostream.h"
 #include "llvm/ADT/STLExtras.h"
 
 #include "Interop.h"
 #include "LinkageType.h"
 #include "IntrinsicType.h"
+#include "Predicate.h"
 
 // pre-define classes
 namespace LLVM
@@ -30,4 +33,5 @@ namespace LLVM
 	ref class LoadInstruction;
 	ref class CallInstruction;
 	ref class ReturnInstruction;
+	ref class PHINode;
 }

@@ -15,6 +15,7 @@ namespace LLVM
 		IRBuilder(BasicBlock^ block);
 
 		BasicBlock^ GetInsertBlock();
+		void SetInsertPoint(BasicBlock^ block);
 
 		LoadInstruction^ CreateLoad(Value^ pointer, String^ name);
 		void CreateStore(Value^ value, Value^ pointer);
@@ -26,5 +27,6 @@ namespace LLVM
 		void CreateCall(Value^ target);
 		CallInstruction^ CreateCall(Value^ target, String^ name);
 		CallInstruction^ CreateCall(Value^ target, ...array<Value^>^ arguments);
+		PHINode^ CreatePHI(Type^ type, String^ name);
 	};
 }

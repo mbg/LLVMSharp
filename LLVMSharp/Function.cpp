@@ -24,6 +24,17 @@ LLVM::Function::Function(Module^ module, String^ name, FunctionType^ type, Linka
 	this->Initialise(module, name, type, linkage);
 }
 
+void LLVM::Function::SetArgumentName(unsigned index, String^ name)
+{
+	llvm::Function::arg_iterator args = this->function->arg_begin();
+	
+	for(unsigned i = 0; i < index; i++)
+		args++;
+
+	llvm::Value* arg = args;
+	arg->setName(ToUnmanagedString(name));
+}
+
 bool LLVM::Function::Empty::get()
 {
 	return this->function->empty();

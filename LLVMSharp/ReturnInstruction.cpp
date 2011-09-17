@@ -1,6 +1,7 @@
 
 #include "ReturnInstruction.h"
 #include "LLVMContext.h"
+#include "Value.h"
 #include "BasicBlock.h"
 
 LLVM::ReturnInstruction^ LLVM::ReturnInstruction::Create(LLVM::LLVMContext^ context, LLVM::BasicBlock^ block)
@@ -10,7 +11,10 @@ LLVM::ReturnInstruction^ LLVM::ReturnInstruction::Create(LLVM::LLVMContext^ cont
 		block->GetNativeBlock()));
 }
 
-llvm::ReturnInst* LLVM::ReturnInstruction::GetNativeInstruction()
+LLVM::ReturnInstruction^ LLVM::ReturnInstruction::Create(LLVM::LLVMContext^ context, LLVM::Value^ value, LLVM::BasicBlock^ parent)
 {
-	return this->instruction;
+	return gcnew LLVM::ReturnInstruction(llvm::ReturnInst::Create(
+		context->GetNativeContext(),
+		value->GetNativeValue(),
+		parent->GetNativeBlock()));
 }

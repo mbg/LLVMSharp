@@ -15,6 +15,7 @@ namespace LLVM
 
 		Constant^ GetOrInsertFunction(String^ name, FunctionType^ signature);
 
+		void WriteToFile(String^ filename);
 		void Dump();
 	internal:
 		llvm::Module* GetNativeModule();

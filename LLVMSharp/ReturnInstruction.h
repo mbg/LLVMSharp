@@ -2,17 +2,17 @@
 #pragma once
 
 #include "LLVM.h"
+#include "Instruction.h"
 
 namespace LLVM
 {
-	public ref class ReturnInstruction
+	public ref class ReturnInstruction : Instruction
 	{
 	private:
-		llvm::ReturnInst* instruction;
 	public:
 		static ReturnInstruction^ Create(LLVMContext^ context, BasicBlock^ block);
+		static ReturnInstruction^ Create(LLVMContext^ context, Value^ value, BasicBlock^ parent);
 	internal:
-		ReturnInstruction(llvm::ReturnInst* instruction) : instruction(instruction) { };
-		llvm::ReturnInst* GetNativeInstruction();
+		ReturnInstruction(llvm::ReturnInst* instruction) : Instruction(instruction) { };
 	};
 }

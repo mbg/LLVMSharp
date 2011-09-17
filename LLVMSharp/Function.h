@@ -24,6 +24,8 @@ namespace LLVM
 			bool get();
 		}
 
+		void SetArgumentName(unsigned index, String^ name);
+
 		static explicit operator Function^ (Constant^ constant);
 		static operator Constant^ (Function^ function);
 
