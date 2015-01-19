@@ -9,7 +9,7 @@
 
 LLVM::IRBuilder::IRBuilder(LLVM::BasicBlock^ block)
 {
-	this->builder = new llvm::IRBuilder<>(block->GetNativeBlock());
+	this->builder = new llvm::IRBuilder<>(block);
 }
 
 LLVM::BasicBlock^ LLVM::IRBuilder::GetInsertBlock()
@@ -19,43 +19,43 @@ LLVM::BasicBlock^ LLVM::IRBuilder::GetInsertBlock()
 
 void LLVM::IRBuilder::SetInsertPoint(LLVM::BasicBlock^ block)
 {
-	this->builder->SetInsertPoint(block->GetNativeBlock());
+	this->builder->SetInsertPoint(block);
 }
 
 LLVM::LoadInstruction^ LLVM::IRBuilder::CreateLoad(LLVM::Value^ pointer, String^ name)
 {
 	return gcnew LLVM::LoadInstruction(this->builder->CreateLoad(
-		pointer->GetNativeValue(),
+		pointer,
 		ToUnmanagedString(name)));
 }
 
 void LLVM::IRBuilder::CreateStore(LLVM::Value^ value, LLVM::Value^ pointer)
 {
 	this->builder->CreateStore(
-		value->GetNativeValue(),
-		pointer->GetNativeValue());
+		value,
+		pointer);
 }
 
 LLVM::Value^ LLVM::IRBuilder::CreateAdd(LLVM::Value^ leftValue, LLVM::Value^ rightValue, String^ name)
 {
 	return gcnew LLVM::Value(this->builder->CreateAdd(
-		leftValue->GetNativeValue(),
-		rightValue->GetNativeValue(),
+		leftValue,
+		rightValue,
 		ToUnmanagedString(name)));
 }
 
 LLVM::Value^ LLVM::IRBuilder::CreateGEP(LLVM::Value^ pointer, LLVM::Value^ index, String^ name)
 {
 	return gcnew LLVM::Value(this->builder->CreateGEP(
-		pointer->GetNativeValue(),
-		index->GetNativeValue(),
+		pointer,
+		index,
 		ToUnmanagedString(name)));
 }
 
 LLVM::Value^ LLVM::IRBuilder::CreateTrunc(LLVM::Value^ value, LLVM::Type^ type, String^ name)
 {
 	return gcnew LLVM::Value(this->builder->CreateTrunc(
-		value->GetNativeValue(),
+		value,
 		type->GetNativeType(),
 		ToUnmanagedString(name)));
 }
@@ -63,27 +63,27 @@ LLVM::Value^ LLVM::IRBuilder::CreateTrunc(LLVM::Value^ value, LLVM::Type^ type, 
 LLVM::Value^ LLVM::IRBuilder::CreateSignExtend(LLVM::Value^ value, LLVM::Type^ type, String^ name)
 {
 	return gcnew LLVM::Value(this->builder->CreateSExt(
-		value->GetNativeValue(),
+		value,
 		type->GetNativeType(),
 		ToUnmanagedString(name)));
 }
 
 void LLVM::IRBuilder::CreateBranch(LLVM::BasicBlock^ target)
 {
-	this->builder->CreateBr(target->GetNativeBlock());
+	this->builder->CreateBr(target);
 }
 
 void LLVM::IRBuilder::CreateCall(LLVM::Value^ target)
 {
 	this->builder->CreateCall(
-		target->GetNativeValue(),
+		target,
 		"");
 }
 
 LLVM::CallInstruction^ LLVM::IRBuilder::CreateCall(LLVM::Value^ target, String^ name)
 {
 	return gcnew LLVM::CallInstruction(this->builder->CreateCall(
-		target->GetNativeValue(),
+		target,
 		ToUnmanagedString(name)));
 }
 
@@ -93,19 +93,19 @@ LLVM::CallInstruction^ LLVM::IRBuilder::CreateCall(LLVM::Value^ target, ...array
 
 	for(int i=0; i < arguments->Length; i++)
 	{
-		args[i] = arguments[i]->GetNativeValue();
+		args[i] = arguments[i];
 	}
 
 	return gcnew LLVM::CallInstruction(this->builder->CreateCall(
-		target->GetNativeValue(),
+		target,
         makeArrayRef(
 		args,
 		args + arguments->Length)));
 }
 
-LLVM::PHINode^ LLVM::IRBuilder::CreatePHI(LLVM::Type^ type, String^ name)
+LLVM::PHINode^ LLVM::IRBuilder::CreatePHI(LLVM::Type^ type, unsigned int numReserved, String^ name)
 {
 	return gcnew LLVM::PHINode(this->builder->CreatePHI(
-		type->GetNativeType(), 0,
+		type->GetNativeType(), numReserved,
 		ToUnmanagedString(name)));
 }

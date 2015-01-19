@@ -2,16 +2,14 @@
 
 #include "llvm/LLVMContext.h"
 
+#include "Wrapper.h"
+
 namespace LLVM 
 {
-	public ref class LLVMContext 
+    public ref class LLVMContext : Wrapper<llvm::LLVMContext&>
 	{
-	private:
-		llvm::LLVMContext &context;
 	public:
-		LLVMContext() : context(llvm::getGlobalContext()) { };
+        LLVMContext() : Wrapper(llvm::getGlobalContext()) {};
 		~LLVMContext();
-	internal:
-		llvm::LLVMContext& GetNativeContext();
 	};
 }

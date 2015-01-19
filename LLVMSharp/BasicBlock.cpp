@@ -5,24 +5,19 @@
 #include "Instruction.h"
 
 LLVM::BasicBlock::BasicBlock(LLVM::LLVMContext^ context, LLVM::Function^ function, String^ name)
-{
-	this->block = llvm::BasicBlock::Create(
-		context->GetNativeContext(), 
+    : LLVM::Wrapper<llvm::BasicBlock*>(llvm::BasicBlock::Create(
+        context->Native, 
 		ToUnmanagedString(name),
-		function->GetNativeFunction());
+		function->GetNativeFunction()))
+{
 }
 
 LLVM::BasicBlock::BasicBlock(llvm::BasicBlock* block)
+    : LLVM::Wrapper<llvm::BasicBlock*>(block)
 {
-	this->block = block;
-}
-
-llvm::BasicBlock* LLVM::BasicBlock::GetNativeBlock()
-{
-	return this->block;
 }
 
 void LLVM::BasicBlock::PushBack(LLVM::Instruction^ instruction)
 {
-	this->block->getInstList().push_back(instruction->GetNativeInstruction());
+    this->Native->getInstList().push_back(instruction);
 }

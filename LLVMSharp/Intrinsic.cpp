@@ -15,7 +15,7 @@ LLVM::Function^ LLVM::Intrinsic::GetDecleration(
 	}
 
 	llvm::Function* function = llvm::Intrinsic::getDeclaration(
-		module->GetNativeModule(),
+		module,
 		(llvm::Intrinsic::ID)id,
         makeArrayRef(
 		    argtypes,

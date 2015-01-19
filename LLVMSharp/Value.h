@@ -3,14 +3,14 @@
 
 #include "LLVM.h"
 
+#include "Wrapper.h"
+
 namespace LLVM
 {
-	public ref class Value
+    public ref class Value : Wrapper<llvm::Value*>
 	{
 	private:
-		llvm::Value* value;
 	internal:
-		Value(llvm::Value* value) : value(value) { };
-		llvm::Value* GetNativeValue();
+		Value(llvm::Value* value) : Wrapper(value) { };
 	};
 }

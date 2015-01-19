@@ -10,9 +10,8 @@ namespace LLVM
 	private:
 		llvm::PHINode* node;
 	public:
-		PHINode(Type^ type, String^ name, BasicBlock^ block);
+		PHINode(Type^ type, unsigned int, String^ name, BasicBlock^ block);
 
-		void ReserveOperandSpace(unsigned int values);
 		void AddIncomding(Value^ value, BasicBlock^ block);
 
 		static explicit operator PHINode^ (Value^ value);

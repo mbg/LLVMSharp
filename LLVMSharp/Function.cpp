@@ -11,7 +11,7 @@ void LLVM::Function::Initialise(Module^ module, String^ name, FunctionType^ type
 		type->GetNativeType(), 
 		(llvm::GlobalValue::LinkageTypes)linkage, 
 		ToUnmanagedString(name), 
-		module->GetNativeModule());
+		module);
 }
 
 LLVM::Function::Function(Module^ module, String^ name, FunctionType^ type)

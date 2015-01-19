@@ -2,14 +2,15 @@
 
 #include "LLVM.h"
 
+#include "Wrapper.h"
+
 using namespace System;
 
 namespace LLVM
 {
-	public ref class Module 
+    public ref class Module : Wrapper<llvm::Module*>
 	{
 	private:
-		llvm::Module* module;
 	public:
 		Module(LLVMContext^ context, String^ name);
 
@@ -17,7 +18,5 @@ namespace LLVM
 
 		void WriteToFile(String^ filename);
 		void Dump();
-	internal:
-		llvm::Module* GetNativeModule();
 	};
 }

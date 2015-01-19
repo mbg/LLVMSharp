@@ -6,7 +6,7 @@
 LLVM::IntegerType::IntegerType(LLVM::LLVMContext^ context, unsigned bits)
 {
 	this->type = llvm::IntegerType::get(
-		context->GetNativeContext(),
+		context,
 		bits);
 }
 

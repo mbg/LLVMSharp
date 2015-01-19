@@ -8,7 +8,7 @@ LLVM::GlobalVariable::GlobalVariable(
 	LLVM::Module^ module, LLVM::Type^ type, bool constant, LLVM::LinkageType linkage, LLVM::Constant^ value, String^ name)
 {
 	this->global = new llvm::GlobalVariable(
-		*(module->GetNativeModule()),
+        *(module->Native),
 		type->GetNativeType(),
 		constant,
 		(llvm::GlobalValue::LinkageTypes)linkage,

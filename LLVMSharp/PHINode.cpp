@@ -4,29 +4,24 @@
 #include "Value.h"
 #include "BasicBlock.h"
 
-LLVM::PHINode::PHINode(LLVM::Type^ type, String^ name, LLVM::BasicBlock^ block)
+LLVM::PHINode::PHINode(LLVM::Type^ type, unsigned int numReserved, String^ name, LLVM::BasicBlock^ block)
 {
 	this->node = llvm::PHINode::Create(
-		type->GetNativeType(), 0,
+		type->GetNativeType(), numReserved,
 		ToUnmanagedString(name),
-		block->GetNativeBlock());
-}
-
-void LLVM::PHINode::ReserveOperandSpace(unsigned int values)
-{
-	//this->node->reserveOperandSpace(values);
+		block);
 }
 
 void LLVM::PHINode::AddIncomding(LLVM::Value^ value, LLVM::BasicBlock^ block)
 {
 	this->node->addIncoming(
-		value->GetNativeValue(),
-		block->GetNativeBlock());
+		value,
+		block);
 }
 
 LLVM::PHINode::operator LLVM::PHINode^(LLVM::Value^ value)
 {
-	return gcnew LLVM::PHINode(llvm::cast<llvm::PHINode>(value->GetNativeValue()));
+    return gcnew LLVM::PHINode(llvm::cast<llvm::PHINode>(value->Native));
 }
 
 LLVM::PHINode::operator LLVM::Value^(LLVM::PHINode^ node)

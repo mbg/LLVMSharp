@@ -8,13 +8,19 @@
 #include "llvm/Module.h"
 #include "llvm/Bitcode/ReaderWriter.h"
 #include "llvm/Support/IRBuilder.h"
+#include "llvm/Support/Host.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/ADT/Triple.h"
 #include "llvm/ADT/STLExtras.h"
 
 #include "Interop.h"
 #include "LinkageType.h"
 #include "IntrinsicType.h"
 #include "Predicate.h"
+#include "ArchType.h"
+#include "VendorType.h"
+#include "OSType.h"
+#include "EnvironmentType.h"
 
 // pre-define classes
 namespace LLVM

@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Types">
       <UniqueIdentifier>{23fccfbf-e654-4681-a714-88f6e36b3c3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Support">
+      <UniqueIdentifier>{7cc1388f-3994-44cc-80f9-6d034ecda859}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Support">
+      <UniqueIdentifier>{ea19f563-3b22-4f31-96b1-eca942e0e826}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LLVMContext.cpp">
@@ -95,6 +101,15 @@
     </ClCompile>
     <ClCompile Include="CompareInstruction.cpp">
       <Filter>Source Files\Instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="Wrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Triple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetRegistry.cpp">
+      <Filter>Source Files\Support</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +196,27 @@
     </ClInclude>
     <ClInclude Include="InstructionType.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Triple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArchType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VendorType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OSType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnvironmentType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetRegistry.h">
+      <Filter>Header Files\Support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

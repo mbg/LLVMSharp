@@ -7,14 +7,14 @@
 LLVM::ReturnInstruction^ LLVM::ReturnInstruction::Create(LLVM::LLVMContext^ context, LLVM::BasicBlock^ block)
 {
 	return gcnew LLVM::ReturnInstruction(llvm::ReturnInst::Create(
-		context->GetNativeContext(),
-		block->GetNativeBlock()));
+		context,
+		block));
 }
 
 LLVM::ReturnInstruction^ LLVM::ReturnInstruction::Create(LLVM::LLVMContext^ context, LLVM::Value^ value, LLVM::BasicBlock^ parent)
 {
 	return gcnew LLVM::ReturnInstruction(llvm::ReturnInst::Create(
-		context->GetNativeContext(),
-		value->GetNativeValue(),
-		parent->GetNativeBlock()));
+		context,
+		value,
+		parent));
 }

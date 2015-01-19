@@ -7,14 +7,14 @@
 LLVM::Constant::Constant(LLVM::LLVMContext^ context, UInt32 bits, UInt64 value)
 {
 	this->constant = llvm::ConstantInt::get(
-		context->GetNativeContext(),
+		context,
 		llvm::APInt(bits, value));
 }
 
 LLVM::Constant::Constant(LLVM::LLVMContext^ context, String^ value)
 {
 	this->constant = llvm::ConstantDataArray::getString(
-		context->GetNativeContext(),
+		context,
 		ToUnmanagedString(value),
 		true);
 }
@@ -22,7 +22,7 @@ LLVM::Constant::Constant(LLVM::LLVMContext^ context, String^ value)
 LLVM::Constant::Constant(LLVM::LLVMContext^ context, String^ value, bool isNullTerminated)
 {
 	this->constant = llvm::ConstantDataArray::getString(
-		context->GetNativeContext(),
+		context,
 		ToUnmanagedString(value),
 		isNullTerminated);
 }
@@ -44,7 +44,7 @@ void LLVM::Constant::TruncOrBitCast(LLVM::Type^ type)
 
 LLVM::Constant::operator LLVM::Constant^(LLVM::Value^ value)
 {
-	return gcnew LLVM::Constant(llvm::cast<llvm::Constant>(value->GetNativeValue()));
+	return gcnew LLVM::Constant(llvm::cast<llvm::Constant>(value->Native));
 }
 
 LLVM::Constant::operator LLVM::Value^(LLVM::Constant^ constant)

@@ -9,11 +9,11 @@
 LLVM::Instruction^ LLVM::CallInstruction::CreateMalloc(BasicBlock^ block, Type^ t0, Type^ t1, Value^ allocSize, Value^ arraySize, Function^ mallocFunction, String^ name)
 {
 	return gcnew Instruction(llvm::CallInst::CreateMalloc(
-		block->GetNativeBlock(),
+		block,
 		t0->GetNativeType(),
 		t1->GetNativeType(),
-		allocSize->GetNativeValue(),
-		arraySize->GetNativeValue(),
+		allocSize,
+		arraySize,
 		mallocFunction == nullptr ? NULL : mallocFunction->GetNativeFunction(),
 		ToUnmanagedString(name)));
 }
@@ -21,36 +21,36 @@ LLVM::Instruction^ LLVM::CallInstruction::CreateMalloc(BasicBlock^ block, Type^ 
 LLVM::Instruction^ LLVM::CallInstruction::CreateFree(LLVM::Value^ pointer, LLVM::BasicBlock^ block)
 {
 	return gcnew LLVM::Instruction(llvm::CallInst::CreateFree(
-		pointer->GetNativeValue(),
-		block->GetNativeBlock()));
+		pointer,
+		block));
 }
 
 LLVM::CallInstruction^ LLVM::CallInstruction::Create(LLVM::Value^ target, String^ name, LLVM::BasicBlock^ parent)
 {
 	return gcnew LLVM::CallInstruction(llvm::CallInst::Create(
-		target->GetNativeValue(),
+		target,
 		ToUnmanagedString(name),
-		parent->GetNativeBlock()));
+		parent));
 }
 
 bool LLVM::CallInstruction::TailCall::get()
 {
-	llvm::CallInst* inst = (llvm::CallInst*)this->GetNativeInstruction();
+    llvm::CallInst* inst = (llvm::CallInst*)this->Native;
 	return inst->isTailCall();
 }
 
 void LLVM::CallInstruction::TailCall::set(bool value)
 {
-	llvm::CallInst* inst = (llvm::CallInst*)this->GetNativeInstruction();
+    llvm::CallInst* inst = (llvm::CallInst*)this->Native;
 	inst->setTailCall(value);
 }
 
 LLVM::CallInstruction::operator LLVM::CallInstruction^(LLVM::Value^ value)
 {
-	return gcnew LLVM::CallInstruction(llvm::cast<llvm::CallInst>(value->GetNativeValue()));
+    return gcnew LLVM::CallInstruction(llvm::cast<llvm::CallInst>(value->Native));
 }
 
 LLVM::CallInstruction::operator LLVM::Value^(LLVM::CallInstruction^ instruction)
 {
-	return gcnew LLVM::Value(instruction->GetNativeInstruction());
+	return gcnew LLVM::Value(instruction);
 }

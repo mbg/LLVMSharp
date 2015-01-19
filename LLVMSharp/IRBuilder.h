@@ -27,6 +27,6 @@ namespace LLVM
 		void CreateCall(Value^ target);
 		CallInstruction^ CreateCall(Value^ target, String^ name);
 		CallInstruction^ CreateCall(Value^ target, ...array<Value^>^ arguments);
-		PHINode^ CreatePHI(Type^ type, String^ name);
+		PHINode^ CreatePHI(Type^ type, unsigned int, String^ name);
 	};
 }

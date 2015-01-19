@@ -183,8 +183,7 @@ namespace Example1
                         BasicBlock bb1 = new BasicBlock(this.context, this.brainfFunction, "brainf");
                         this.builder.SetInsertPoint(bb1);
 
-                        PHINode phi0 = new PHINode(PointerType.GetUnqualified(Type.GetInteger8Type(this.context)), "head", testbb);
-                        phi0.ReserveOperandSpace(2);
+                        PHINode phi0 = new PHINode(PointerType.GetUnqualified(Type.GetInteger8Type(this.context)), 2, "head", testbb);
                         phi0.AddIncomding(this.currentHead, bb0);
                         this.currentHead = phi0;
 
@@ -320,8 +319,7 @@ namespace Example1
 
                 this.builder.SetInsertPoint(bb0);
 
-                PHINode phi1 = this.builder.CreatePHI(Type.GetInteger8PointerType(this.context), "head");
-                phi1.ReserveOperandSpace(1);
+                PHINode phi1 = this.builder.CreatePHI(Type.GetInteger8PointerType(this.context), 1, "head");
                 phi1.AddIncomding(head0, testBlock);
 
                 this.currentHead = phi1;

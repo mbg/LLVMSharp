@@ -6,14 +6,14 @@
 LLVM::LoadInstruction::LoadInstruction(LLVM::Value^ value, String^ name, LLVM::BasicBlock^ parent)
 {
 	this->instruction = new llvm::LoadInst(
-		value->GetNativeValue(),
+		value,
 		ToUnmanagedString(name),
-		parent->GetNativeBlock());
+		parent);
 }
 
 LLVM::LoadInstruction::operator LLVM::LoadInstruction^(LLVM::Value^ value)
 {
-	return gcnew LLVM::LoadInstruction(llvm::cast<llvm::LoadInst>(value->GetNativeValue()));
+    return gcnew LLVM::LoadInstruction(llvm::cast<llvm::LoadInst>(value->Native));
 }
 
 LLVM::LoadInstruction::operator LLVM::Value^(LLVM::LoadInstruction^ instruction)

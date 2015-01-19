@@ -94,15 +94,20 @@
     <ClCompile Include="PHINode.cpp" />
     <ClCompile Include="PointerType.cpp" />
     <ClCompile Include="ReturnInstruction.cpp" />
+    <ClCompile Include="TargetRegistry.cpp" />
+    <ClCompile Include="Triple.cpp" />
     <ClCompile Include="Type.cpp" />
     <ClCompile Include="Value.cpp" />
+    <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArchType.h" />
     <ClInclude Include="BasicBlock.h" />
     <ClInclude Include="BranchInstruction.h" />
     <ClInclude Include="CallInstruction.h" />
     <ClInclude Include="CompareInstruction.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="EnvironmentType.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="FunctionType.h" />
     <ClInclude Include="GlobalValue.h" />
@@ -120,12 +125,17 @@
     <ClInclude Include="LLVMContext.h" />
     <ClInclude Include="LoadInstruction.h" />
     <ClInclude Include="Module.h" />
+    <ClInclude Include="OSType.h" />
     <ClInclude Include="PHINode.h" />
     <ClInclude Include="PointerType.h" />
     <ClInclude Include="Predicate.h" />
     <ClInclude Include="ReturnInstruction.h" />
+    <ClInclude Include="TargetRegistry.h" />
+    <ClInclude Include="Triple.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="Value.h" />
+    <ClInclude Include="VendorType.h" />
+    <ClInclude Include="Wrapper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

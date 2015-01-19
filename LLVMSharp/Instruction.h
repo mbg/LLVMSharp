@@ -3,17 +3,17 @@
 
 #include "LLVM.h"
 
+#include "Wrapper.h"
+
 namespace LLVM
 {
-	public ref class Instruction
+    public ref class Instruction : Wrapper<llvm::Instruction*>
 	{
 	private:
-		llvm::Instruction* instruction;
 	public:
 		static explicit operator Instruction^ (Value^ constant);
 		static operator Value^ (Instruction^ function);
 	internal:
-		Instruction(llvm::Instruction* instruction) : instruction(instruction) { };
-		llvm::Instruction* GetNativeInstruction();
+		Instruction(llvm::Instruction* instruction) : Wrapper(instruction) { };
 	};
 }
