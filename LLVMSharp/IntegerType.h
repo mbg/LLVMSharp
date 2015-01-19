@@ -8,7 +8,7 @@ namespace LLVM
 	public ref class IntegerType
 	{
 	private:
-		const llvm::IntegerType* type;
+		llvm::IntegerType* type;
 	public:
 		IntegerType(LLVMContext^ context, unsigned bits);
 
@@ -25,7 +25,7 @@ namespace LLVM
 		static explicit operator IntegerType^ (Type^ type);
 		static operator Type^ (IntegerType^ type);
 	internal:
-		IntegerType(const llvm::IntegerType* type) : type(type) {};
+		IntegerType(llvm::IntegerType* type) : type(type) {};
 		const llvm::IntegerType* GetNativeType();
 	};
 }

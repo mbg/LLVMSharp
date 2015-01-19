@@ -98,13 +98,14 @@ LLVM::CallInstruction^ LLVM::IRBuilder::CreateCall(LLVM::Value^ target, ...array
 
 	return gcnew LLVM::CallInstruction(this->builder->CreateCall(
 		target->GetNativeValue(),
+        makeArrayRef(
 		args,
-		args + arguments->Length));
+		args + arguments->Length)));
 }
 
 LLVM::PHINode^ LLVM::IRBuilder::CreatePHI(LLVM::Type^ type, String^ name)
 {
 	return gcnew LLVM::PHINode(this->builder->CreatePHI(
-		type->GetNativeType(),
+		type->GetNativeType(), 0,
 		ToUnmanagedString(name)));
 }

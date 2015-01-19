@@ -5,20 +5,20 @@
 
 LLVM::FunctionType::FunctionType(LLVM::Type^ returnType)
 {
-	std::vector<const llvm::Type*> types;
-	this->type = llvm::FunctionType::get(returnType->GetNativeType(), types, false);
+	//std::vector<const llvm::Type*> types;
+	this->type = llvm::FunctionType::get(returnType->GetNativeType(), false);
 }
 
 LLVM::FunctionType::FunctionType(LLVM::Type^ returnType, ...array<LLVM::Type^>^ argumentTypes)
 {
-	std::vector<const llvm::Type*> types;
+	std::vector<llvm::Type*> types;
 
 	for(int i = 0; i < argumentTypes->Length; i++)
 	{
 		types.push_back(argumentTypes[i]->GetNativeType());
 	}
 
-	this->type = llvm::FunctionType::get(returnType->GetNativeType(), types, false);
+	this->type = llvm::FunctionType::get(returnType->GetNativeType(), makeArrayRef(types), false);
 }
 
 llvm::FunctionType* LLVM::FunctionType::GetNativeType()

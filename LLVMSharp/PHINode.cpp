@@ -7,14 +7,14 @@
 LLVM::PHINode::PHINode(LLVM::Type^ type, String^ name, LLVM::BasicBlock^ block)
 {
 	this->node = llvm::PHINode::Create(
-		type->GetNativeType(),
+		type->GetNativeType(), 0,
 		ToUnmanagedString(name),
 		block->GetNativeBlock());
 }
 
 void LLVM::PHINode::ReserveOperandSpace(unsigned int values)
 {
-	this->node->reserveOperandSpace(values);
+	//this->node->reserveOperandSpace(values);
 }
 
 void LLVM::PHINode::AddIncomding(LLVM::Value^ value, LLVM::BasicBlock^ block)

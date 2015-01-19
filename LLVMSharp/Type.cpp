@@ -4,12 +4,12 @@
 #include "IntegerType.h"
 #include "PointerType.h"
 
-LLVM::Type::Type(const llvm::Type* type)
+LLVM::Type::Type(llvm::Type* type)
 {
 	this->type = type;
 }
 
-const llvm::Type* LLVM::Type::GetNativeType()
+llvm::Type* LLVM::Type::GetNativeType()
 {
 	return this->type;
 }

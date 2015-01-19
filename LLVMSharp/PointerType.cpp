@@ -23,7 +23,7 @@ LLVM::PointerType::operator LLVM::Type^(LLVM::PointerType^ type)
 	return gcnew LLVM::Type(type->type);
 }
 
-const llvm::PointerType* LLVM::PointerType::GetNativeType()
+llvm::PointerType* LLVM::PointerType::GetNativeType()
 {
 	return this->type;
 }

@@ -8,11 +8,11 @@ namespace LLVM
 	public ref class Type
 	{
 	private:
-		const llvm::Type* type;
+		llvm::Type* type;
 	internal:
-		Type(const llvm::Type* type);
+		Type(llvm::Type* type);
 
-		const llvm::Type* GetNativeType();
+		llvm::Type* GetNativeType();
 	public:
 		// implementation specific types
 		static Type^ GetVoidType(LLVM::LLVMContext^ context);

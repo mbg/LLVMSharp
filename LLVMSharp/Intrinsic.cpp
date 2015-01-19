@@ -7,7 +7,7 @@
 LLVM::Function^ LLVM::Intrinsic::GetDecleration(
 	LLVM::Module^ module, LLVM::IntrinsicType id, ...array<LLVM::Type^>^ types)
 {
-	const llvm::Type** argtypes = new const llvm::Type*[types->Length];
+	llvm::Type** argtypes = new llvm::Type*[types->Length];
 
 	for(int i = 0; i < types.Length; i++)
 	{
@@ -17,8 +17,9 @@ LLVM::Function^ LLVM::Intrinsic::GetDecleration(
 	llvm::Function* function = llvm::Intrinsic::getDeclaration(
 		module->GetNativeModule(),
 		(llvm::Intrinsic::ID)id,
-		argtypes,
-		types->Length);
+        makeArrayRef(
+		    argtypes,
+		    types->Length));
 
 	return gcnew LLVM::Function(function);
 }
