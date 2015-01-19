@@ -48,8 +48,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\SDKs\llvm-3.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\SDKs\llvm-3.0\lib\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\SDKs\llvm-3.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\SDKs\llvm-3.1\lib\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

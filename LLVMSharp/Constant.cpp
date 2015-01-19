@@ -13,7 +13,7 @@ LLVM::Constant::Constant(LLVM::LLVMContext^ context, UInt32 bits, UInt64 value)
 
 LLVM::Constant::Constant(LLVM::LLVMContext^ context, String^ value)
 {
-	this->constant = llvm::ConstantArray::get(
+	this->constant = llvm::ConstantDataArray::getString(
 		context->GetNativeContext(),
 		ToUnmanagedString(value),
 		true);
@@ -21,7 +21,7 @@ LLVM::Constant::Constant(LLVM::LLVMContext^ context, String^ value)
 
 LLVM::Constant::Constant(LLVM::LLVMContext^ context, String^ value, bool isNullTerminated)
 {
-	this->constant = llvm::ConstantArray::get(
+	this->constant = llvm::ConstantDataArray::getString(
 		context->GetNativeContext(),
 		ToUnmanagedString(value),
 		isNullTerminated);
