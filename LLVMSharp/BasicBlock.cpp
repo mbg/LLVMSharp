@@ -8,7 +8,7 @@ LLVM::BasicBlock::BasicBlock(LLVM::LLVMContext^ context, LLVM::Function^ functio
     : LLVM::Wrapper<llvm::BasicBlock*>(llvm::BasicBlock::Create(
         context->Native, 
 		ToUnmanagedString(name),
-		function->GetNativeFunction()))
+		function))
 {
 }
 

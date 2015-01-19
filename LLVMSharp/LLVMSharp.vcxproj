@@ -91,6 +91,8 @@
     <ClCompile Include="LLVMContext.cpp" />
     <ClCompile Include="LoadInstruction.cpp" />
     <ClCompile Include="Module.cpp" />
+    <ClCompile Include="Pass.cpp" />
+    <ClCompile Include="PassManager.cpp" />
     <ClCompile Include="PHINode.cpp" />
     <ClCompile Include="PointerType.cpp" />
     <ClCompile Include="ReturnInstruction.cpp" />
@@ -126,6 +128,9 @@
     <ClInclude Include="LoadInstruction.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="OSType.h" />
+    <ClInclude Include="Pass.h" />
+    <ClInclude Include="PassKind.h" />
+    <ClInclude Include="PassManager.h" />
     <ClInclude Include="PHINode.h" />
     <ClInclude Include="PointerType.h" />
     <ClInclude Include="Predicate.h" />

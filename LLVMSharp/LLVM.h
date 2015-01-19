@@ -21,6 +21,7 @@
 #include "VendorType.h"
 #include "OSType.h"
 #include "EnvironmentType.h"
+#include "PassKind.h"
 
 // pre-define classes
 namespace LLVM

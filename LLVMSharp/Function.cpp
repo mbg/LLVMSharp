@@ -4,29 +4,29 @@
 #include "Value.h"
 
 using namespace System;
+using namespace LLVM;
 
-void LLVM::Function::Initialise(Module^ module, String^ name, FunctionType^ type, LinkageType linkage)
-{
-	this->function = llvm::Function::Create(
+LLVM::Function::Function(Module^ module, String^ name, FunctionType^ type, LinkageType linkage)
+    : LLVM::Wrapper<llvm::Function*>(llvm::Function::Create(
 		type->GetNativeType(), 
 		(llvm::GlobalValue::LinkageTypes)linkage, 
 		ToUnmanagedString(name), 
-		module);
+		module))
+{
 }
 
-LLVM::Function::Function(Module^ module, String^ name, FunctionType^ type)
+Function::Function(Module^ module, String^ name, FunctionType^ type)
+    : LLVM::Wrapper<llvm::Function*>(llvm::Function::Create(
+		type->GetNativeType(), 
+        (llvm::GlobalValue::LinkageTypes)LinkageType::ExternalLinkage, 
+		ToUnmanagedString(name), 
+		module))
 {
-	this->Initialise(module, name, type, LinkageType::ExternalLinkage);
-}
-
-LLVM::Function::Function(Module^ module, String^ name, FunctionType^ type, LinkageType linkage)
-{
-	this->Initialise(module, name, type, linkage);
 }
 
 void LLVM::Function::SetArgumentName(unsigned index, String^ name)
 {
-	llvm::Function::arg_iterator args = this->function->arg_begin();
+	llvm::Function::arg_iterator args = this->Native->arg_begin();
 	
 	for(unsigned i = 0; i < index; i++)
 		args++;
@@ -37,7 +37,7 @@ void LLVM::Function::SetArgumentName(unsigned index, String^ name)
 
 bool LLVM::Function::Empty::get()
 {
-	return this->function->empty();
+	return this->Native->empty();
 }
 
 LLVM::Function::operator LLVM::Function^(LLVM::Constant^ constant)
@@ -47,20 +47,10 @@ LLVM::Function::operator LLVM::Function^(LLVM::Constant^ constant)
 
 LLVM::Function::operator LLVM::Constant^(LLVM::Function^ function)
 {
-	return gcnew LLVM::Constant(function->GetNativeFunction());
+	return gcnew LLVM::Constant(function);
 }
 
 LLVM::Function::operator LLVM::Value^(LLVM::Function^ function)
 {
-	return gcnew LLVM::Value(function->GetNativeFunction());
-}
-
-LLVM::Function::Function(llvm::Function* function)
-{
-	this->function = function;
-}
-
-llvm::Function* LLVM::Function::GetNativeFunction()
-{
-	return this->function;
+	return gcnew LLVM::Value(function);
 }

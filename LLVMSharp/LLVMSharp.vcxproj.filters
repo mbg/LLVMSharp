@@ -111,6 +111,12 @@
     <ClCompile Include="TargetRegistry.cpp">
       <Filter>Source Files\Support</Filter>
     </ClCompile>
+    <ClCompile Include="Pass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PassManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LLVMContext.h">
@@ -217,6 +223,15 @@
     </ClInclude>
     <ClInclude Include="TargetRegistry.h">
       <Filter>Header Files\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Pass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PassKind.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PassManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

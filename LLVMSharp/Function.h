@@ -5,16 +5,14 @@
 #include "LinkageType.h"
 #include "FunctionType.h"
 #include "Module.h"
+#include "Wrapper.h"
 
 using namespace System;
 
 namespace LLVM
 {
-	public ref class Function
+    public ref class Function : Wrapper<llvm::Function*>
 	{
-	private:
-		llvm::Function* function;
-		void Initialise(Module^ module, String^ name, FunctionType^ type, LinkageType linkage);
 	public:
 		Function(Module^ module, String^ name, FunctionType^ type);
 		Function(Module^ module, String^ name, FunctionType^ type, LinkageType linkage);
@@ -31,8 +29,6 @@ namespace LLVM
 
 		static operator Value^ (Function^ function);
 	internal:
-		Function(llvm::Function* function);
-
-		llvm::Function* GetNativeFunction();
+        Function(llvm::Function* function) : Wrapper(function) {};
 	};
 }

@@ -14,7 +14,7 @@ LLVM::Instruction^ LLVM::CallInstruction::CreateMalloc(BasicBlock^ block, Type^ 
 		t1->GetNativeType(),
 		allocSize,
 		arraySize,
-		mallocFunction == nullptr ? NULL : mallocFunction->GetNativeFunction(),
+        mallocFunction == nullptr ? NULL : mallocFunction->Native,
 		ToUnmanagedString(name)));
 }
 
