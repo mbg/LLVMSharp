@@ -103,7 +103,7 @@ namespace Example1
             Type byteType = Type.GetInteger8Type(this.context);
             Constant allocsize = new Constant(byteType);
             allocsize.TruncOrBitCast(intType);
-            Instruction pointerArray = CallInstruction.CreateMalloc(bb, intType, byteType, allocsize, valMemory, null, "arr");
+            Instruction pointerArray = CallInstruction.CreateMalloc(bb, intType, byteType, allocsize, valMemory, "arr");
             bb.PushBack(pointerArray);
 
             // call void @llvm.memset.

@@ -7,7 +7,7 @@
 #include "llvm/Intrinsics.h"
 #include "llvm/Module.h"
 #include "llvm/Bitcode/ReaderWriter.h"
-#include "llvm/Support/IRBuilder.h"
+#include "llvm/IRBuilder.h"
 #include "llvm/Support/Host.h"
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/ADT/Triple.h"
