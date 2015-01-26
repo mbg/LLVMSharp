@@ -1,7 +1,7 @@
 LLVMSharp - .NET bindings for LLVM
 ===================
 
-This library is a .NET wrapper for [LLVM](http://llvm.org/) 3.2 written in C++/CLI. The bindings are written by hand and
+This library is a .NET wrapper for [LLVM](http://llvm.org/) 3.2 written in C++/CLI. These bindings are written by hand and aim to provide .NET developers with access to the full LLVM API.
 
 ## Building LLVM for LLVMSharp
 
