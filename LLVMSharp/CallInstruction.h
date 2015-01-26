@@ -9,6 +9,7 @@ namespace LLVM
 	public ref class CallInstruction : Instruction
 	{
 	public:
+        static Instruction^ CreateMalloc(BasicBlock^ block, Type^ t0, Type^ t1, Value^ allocSize, Value^ arraySize, String^ name);
 		static Instruction^ CreateMalloc(BasicBlock^ block, Type^ t0, Type^ t1, Value^ allocSize, Value^ arraySize, Function^ mallocFunction, String^ name);
 		static Instruction^ CreateFree(Value^ pointer, BasicBlock^ block);
 

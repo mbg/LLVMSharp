@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "llvm/Support/IRBuilder.h"
+#include "llvm/IRBuilder.h"
 #include "LinkageType.h"
 #include "FunctionType.h"
 #include "Module.h"

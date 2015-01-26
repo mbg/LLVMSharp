@@ -6,6 +6,18 @@
 #include "Value.h"
 #include "Function.h"
 
+LLVM::Instruction^ LLVM::CallInstruction::CreateMalloc(BasicBlock^ block, Type^ t0, Type^ t1, Value^ allocSize, Value^ arraySize, String^ name)
+{
+	return gcnew Instruction(llvm::CallInst::CreateMalloc(
+		block,
+		t0->GetNativeType(),
+		t1->GetNativeType(),
+		allocSize,
+		arraySize,
+        0,
+		ToUnmanagedString(name)));
+}
+
 LLVM::Instruction^ LLVM::CallInstruction::CreateMalloc(BasicBlock^ block, Type^ t0, Type^ t1, Value^ allocSize, Value^ arraySize, Function^ mallocFunction, String^ name)
 {
 	return gcnew Instruction(llvm::CallInst::CreateMalloc(
@@ -14,7 +26,7 @@ LLVM::Instruction^ LLVM::CallInstruction::CreateMalloc(BasicBlock^ block, Type^ 
 		t1->GetNativeType(),
 		allocSize,
 		arraySize,
-        mallocFunction == nullptr ? NULL : mallocFunction->Native,
+        mallocFunction,
 		ToUnmanagedString(name)));
 }
 
