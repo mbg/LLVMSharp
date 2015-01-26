@@ -5,7 +5,7 @@ This library is a .NET wrapper for [LLVM](http://llvm.org/) 3.2 written in C++/C
 
 ## Building LLVM for LLVMSharp
 
-To begin, we will need to download the appropriate (LLVM sources)[http://llvm.org/releases/download.html#3.2] and unpack them somewhere (we will refer to that location as `LLVM_SRC`).
+To begin, we will need to download the appropriate [LLVM sources](http://llvm.org/releases/download.html#3.2) and unpack them somewhere (we will refer to that location as `LLVM_SRC`).
 
 Once we have a copy of the LLVM sources, they need to be configured using CMake. We set both, the "Where is the source code" and the "Where to build the binaries" directories to `LLVM_SRC` and click "Configure". We choose a recent version of Visual Studio (tested with `Visual Studio 11`) when prompted.
 
