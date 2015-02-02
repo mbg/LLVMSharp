@@ -40,5 +40,6 @@ namespace LLVM
 	ref class LoadInstruction;
 	ref class CallInstruction;
 	ref class ReturnInstruction;
+    ref class AllocaInstruction;
 	ref class PHINode;
 }

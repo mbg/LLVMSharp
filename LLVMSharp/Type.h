@@ -2,17 +2,14 @@
 #pragma once
 
 #include "LLVM.h"
+#include "Wrapper.h"
 
 namespace LLVM
 {
-	public ref class Type
+    public ref class Type : Wrapper<llvm::Type*>
 	{
-	private:
-		llvm::Type* type;
 	internal:
-		Type(llvm::Type* type);
-
-		llvm::Type* GetNativeType();
+        Type(llvm::Type* type) : Wrapper(type) {};
 	public:
 		// implementation specific types
 		static Type^ GetVoidType(LLVM::LLVMContext^ context);

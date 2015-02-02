@@ -4,16 +4,6 @@
 #include "IntegerType.h"
 #include "PointerType.h"
 
-LLVM::Type::Type(llvm::Type* type)
-{
-	this->type = type;
-}
-
-llvm::Type* LLVM::Type::GetNativeType()
-{
-	return this->type;
-}
-
 LLVM::Type^ LLVM::Type::GetVoidType(LLVM::LLVMContext^ context)
 {
 	return gcnew LLVM::Type(llvm::Type::getVoidTy(context));
@@ -121,5 +111,5 @@ LLVM::PointerType^ LLVM::Type::GetInteger8PointerType(LLVM::LLVMContext^ context
 
 bool LLVM::Type::CanLosslesslyBitCastTo(LLVM::Type^ type)
 {
-	return this->type->canLosslesslyBitCastTo(type->GetNativeType());
+	return this->Native->canLosslesslyBitCastTo(type);
 }

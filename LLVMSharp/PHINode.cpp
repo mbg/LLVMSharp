@@ -7,7 +7,7 @@
 LLVM::PHINode::PHINode(LLVM::Type^ type, unsigned int numReserved, String^ name, LLVM::BasicBlock^ block)
 {
 	this->node = llvm::PHINode::Create(
-		type->GetNativeType(), numReserved,
+		type, numReserved,
 		ToUnmanagedString(name),
 		block);
 }

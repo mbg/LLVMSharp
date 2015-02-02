@@ -5,6 +5,8 @@
 #include "Type.h"
 #include "LoadInstruction.h"
 #include "CallInstruction.h"
+#include "ReturnInstruction.h"
+#include "AllocaInstruction.h"
 #include "PHINode.h"
 
 LLVM::IRBuilder::IRBuilder(LLVM::BasicBlock^ block)
@@ -56,7 +58,7 @@ LLVM::Value^ LLVM::IRBuilder::CreateTrunc(LLVM::Value^ value, LLVM::Type^ type, 
 {
 	return gcnew LLVM::Value(this->builder->CreateTrunc(
 		value,
-		type->GetNativeType(),
+		type,
 		ToUnmanagedString(name)));
 }
 
@@ -64,7 +66,7 @@ LLVM::Value^ LLVM::IRBuilder::CreateSignExtend(LLVM::Value^ value, LLVM::Type^ t
 {
 	return gcnew LLVM::Value(this->builder->CreateSExt(
 		value,
-		type->GetNativeType(),
+		type,
 		ToUnmanagedString(name)));
 }
 
@@ -105,7 +107,38 @@ LLVM::CallInstruction^ LLVM::IRBuilder::CreateCall(LLVM::Value^ target, ...array
 
 LLVM::PHINode^ LLVM::IRBuilder::CreatePHI(LLVM::Type^ type, unsigned int numReserved, String^ name)
 {
+    
 	return gcnew LLVM::PHINode(this->builder->CreatePHI(
-		type->GetNativeType(), numReserved,
+		type, numReserved,
 		ToUnmanagedString(name)));
+}
+
+LLVM::ReturnInstruction^ LLVM::IRBuilder::CreateReturn()
+{
+    return gcnew ReturnInstruction(this->builder->CreateRetVoid());
+}
+
+LLVM::ReturnInstruction^ LLVM::IRBuilder::CreateReturn(Value^ value)
+{
+    return gcnew ReturnInstruction(this->builder->CreateRet(value));
+}
+
+LLVM::AllocaInstruction^ LLVM::IRBuilder::CreateAlloca(Type^ type)
+{
+    return gcnew AllocaInstruction(this->builder->CreateAlloca(type));
+}
+
+LLVM::AllocaInstruction^ LLVM::IRBuilder::CreateAlloca(Type^ type, Value^ arraySize)
+{
+    return gcnew AllocaInstruction(this->builder->CreateAlloca(type, arraySize));
+}
+
+LLVM::AllocaInstruction^ LLVM::IRBuilder::CreateAlloca(Type^ type, String^ name)
+{
+    return gcnew AllocaInstruction(this->builder->CreateAlloca(type, (llvm::Value*)0, ToUnmanagedString(name)));
+}
+
+LLVM::AllocaInstruction^ LLVM::IRBuilder::CreateAlloca(Type^ type, Value^ arraySize, String^ name)
+{
+    return gcnew AllocaInstruction(this->builder->CreateAlloca(type, arraySize, ToUnmanagedString(name)));
 }

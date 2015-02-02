@@ -11,7 +11,7 @@ LLVM::Function^ LLVM::Intrinsic::GetDecleration(
 
 	for(int i = 0; i < types.Length; i++)
 	{
-		argtypes[i] = types[i]->GetNativeType();
+		argtypes[i] = types[i];
 	}
 
 	llvm::Function* function = llvm::Intrinsic::getDeclaration(

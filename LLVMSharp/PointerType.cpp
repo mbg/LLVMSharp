@@ -5,7 +5,7 @@
 LLVM::PointerType^ LLVM::PointerType::Get(LLVM::Type^ type, unsigned addressSpace)
 {
 	return gcnew LLVM::PointerType(llvm::PointerType::get(
-		type->GetNativeType(), addressSpace));
+		type, addressSpace));
 }
 
 LLVM::PointerType^ LLVM::PointerType::GetUnqualified(LLVM::Type^ type)
@@ -15,7 +15,7 @@ LLVM::PointerType^ LLVM::PointerType::GetUnqualified(LLVM::Type^ type)
 
 LLVM::PointerType::operator LLVM::PointerType^(LLVM::Type^ type)
 {
-	return gcnew LLVM::PointerType(llvm::cast<llvm::PointerType>(type->GetNativeType()));
+    return gcnew LLVM::PointerType(llvm::cast<llvm::PointerType>(type->Native));
 }
 
 LLVM::PointerType::operator LLVM::Type^(LLVM::PointerType^ type)

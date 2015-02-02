@@ -29,7 +29,7 @@ LLVM::Constant::Constant(LLVM::LLVMContext^ context, String^ value, bool isNullT
 
 LLVM::Constant::Constant(LLVM::Type^ type)
 {
-	this->constant = llvm::ConstantExpr::getSizeOf(type->GetNativeType());
+	this->constant = llvm::ConstantExpr::getSizeOf(type);
 }
 
 LLVM::Type^ LLVM::Constant::GetType()
@@ -39,7 +39,7 @@ LLVM::Type^ LLVM::Constant::GetType()
 
 void LLVM::Constant::TruncOrBitCast(LLVM::Type^ type)
 {
-	this->constant = llvm::ConstantExpr::getTruncOrBitCast(this->constant, type->GetNativeType());
+	this->constant = llvm::ConstantExpr::getTruncOrBitCast(this->constant, type);
 }
 
 LLVM::Constant::operator LLVM::Constant^(LLVM::Value^ value)

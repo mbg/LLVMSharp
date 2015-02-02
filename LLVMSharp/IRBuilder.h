@@ -28,5 +28,11 @@ namespace LLVM
 		CallInstruction^ CreateCall(Value^ target, String^ name);
 		CallInstruction^ CreateCall(Value^ target, ...array<Value^>^ arguments);
 		PHINode^ CreatePHI(Type^ type, unsigned int, String^ name);
+        ReturnInstruction^ CreateReturn();
+        ReturnInstruction^ CreateReturn(Value^ value);
+        AllocaInstruction^ CreateAlloca(Type^ type);
+        AllocaInstruction^ CreateAlloca(Type^ type, Value^ arraySize);
+        AllocaInstruction^ CreateAlloca(Type^ type, String^ name);
+        AllocaInstruction^ CreateAlloca(Type^ type, Value^ arraySize, String^ name);
 	};
 }

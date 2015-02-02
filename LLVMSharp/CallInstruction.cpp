@@ -10,8 +10,8 @@ LLVM::Instruction^ LLVM::CallInstruction::CreateMalloc(BasicBlock^ block, Type^ 
 {
 	return gcnew Instruction(llvm::CallInst::CreateMalloc(
 		block,
-		t0->GetNativeType(),
-		t1->GetNativeType(),
+		t0,
+		t1,
 		allocSize,
 		arraySize,
         0,
@@ -22,8 +22,8 @@ LLVM::Instruction^ LLVM::CallInstruction::CreateMalloc(BasicBlock^ block, Type^ 
 {
 	return gcnew Instruction(llvm::CallInst::CreateMalloc(
 		block,
-		t0->GetNativeType(),
-		t1->GetNativeType(),
+		t0,
+		t1,
 		allocSize,
 		arraySize,
         mallocFunction,

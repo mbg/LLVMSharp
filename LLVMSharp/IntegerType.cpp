@@ -22,7 +22,7 @@ bool LLVM::IntegerType::PowerOfTwoByteWidth::get()
 
 LLVM::IntegerType::operator LLVM::IntegerType^(LLVM::Type^ type)
 {
-	return gcnew LLVM::IntegerType(llvm::cast<llvm::IntegerType>(type->GetNativeType()));
+    return gcnew LLVM::IntegerType(llvm::cast<llvm::IntegerType>(type->Native));
 }
 
 LLVM::IntegerType::operator LLVM::Type^(LLVM::IntegerType^ type)
