@@ -4,7 +4,7 @@
 
 namespace LLVM
 {
-    ref class AllocaInstruction : Instruction
+    public ref class AllocaInstruction : Instruction
     {
     public:
     internal:
