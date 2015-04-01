@@ -2,19 +2,16 @@
 #pragma once
 
 #include "LLVM.h"
+#include "Type.h"
 
 using namespace System;
 
 namespace LLVM
 {
-	public ref class FunctionType
+    public ref class FunctionType : Type
 	{
-	private:
-		llvm::FunctionType* type;
 	public:
 		FunctionType(Type^ returnType);
 		FunctionType(Type^ returnType, ...array<Type^>^ argumentTypes);
-	internal:
-		llvm::FunctionType* GetNativeType();
 	};
 }

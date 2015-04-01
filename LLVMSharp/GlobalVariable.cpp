@@ -6,12 +6,12 @@
 
 LLVM::GlobalVariable::GlobalVariable(
 	LLVM::Module^ module, LLVM::Type^ type, bool constant, LLVM::LinkageType linkage, LLVM::Constant^ value, String^ name)
-{
-	this->global = new llvm::GlobalVariable(
+    : LLVM::Constant(new llvm::GlobalVariable(
         *(module->Native),
 		type,
 		constant,
 		(llvm::GlobalValue::LinkageTypes)linkage,
-		value->GetNativeConstant(),
-		ToUnmanagedString(name));
+        (llvm::Constant*)value->Native,
+		ToUnmanagedString(name)))
+{
 }

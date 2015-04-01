@@ -15,6 +15,7 @@ namespace LLVM
 		Module(LLVMContext^ context, String^ name);
 
 		Constant^ GetOrInsertFunction(String^ name, FunctionType^ signature);
+        Constant^ GetFunction(String^ name);
 
 		void WriteToFile(String^ filename);
 		void Dump();

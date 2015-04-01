@@ -12,10 +12,22 @@ LLVM::Module::Module(LLVMContext^ context, String^ name)
 
 LLVM::Constant^ LLVM::Module::GetOrInsertFunction(String^ name, FunctionType^ signature)
 {
-    return gcnew LLVM::Constant(this->Native->getOrInsertFunction(
+    llvm::Constant* fn = this->Native->getOrInsertFunction(
 		ToUnmanagedString(name),
-		signature->GetNativeType()));
-	return nullptr;
+        (llvm::FunctionType*)signature->Native);
+
+    return gcnew LLVM::Constant(fn);
+}
+
+LLVM::Constant^ LLVM::Module::GetFunction(String^ name)
+{
+    llvm::Constant* fn = this->Native->getFunction(
+		ToUnmanagedString(name));
+
+    if(fn == NULL)
+        return nullptr;
+
+    return gcnew LLVM::Constant(fn);
 }
 
 void LLVM::Module::WriteToFile(String^ filename)
