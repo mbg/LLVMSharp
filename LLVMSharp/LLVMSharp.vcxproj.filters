@@ -120,6 +120,12 @@
     <ClCompile Include="AllocaInstruction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ArrayType.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantExpr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LLVMContext.h">
@@ -237,6 +243,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AllocaInstruction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayType.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantExpr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

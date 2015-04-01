@@ -74,11 +74,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AllocaInstruction.cpp" />
+    <ClCompile Include="ArrayType.cpp" />
     <ClCompile Include="BasicBlock.cpp" />
     <ClCompile Include="BranchInstruction.cpp" />
     <ClCompile Include="CallInstruction.cpp" />
     <ClCompile Include="CompareInstruction.cpp" />
     <ClCompile Include="Constant.cpp" />
+    <ClCompile Include="ConstantExpr.cpp" />
     <ClCompile Include="Function.cpp" />
     <ClCompile Include="FunctionType.cpp" />
     <ClCompile Include="GlobalValue.cpp" />
@@ -106,11 +108,13 @@
   <ItemGroup>
     <ClInclude Include="AllocaInstruction.h" />
     <ClInclude Include="ArchType.h" />
+    <ClInclude Include="ArrayType.h" />
     <ClInclude Include="BasicBlock.h" />
     <ClInclude Include="BranchInstruction.h" />
     <ClInclude Include="CallInstruction.h" />
     <ClInclude Include="CompareInstruction.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="ConstantExpr.h" />
     <ClInclude Include="EnvironmentType.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="FunctionType.h" />

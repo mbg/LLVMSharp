@@ -3,25 +3,26 @@
 #include "Type.h"
 #include <vector>
 
-LLVM::FunctionType::FunctionType(LLVM::Type^ returnType)
-{
-	//std::vector<const llvm::Type*> types;
-	this->type = llvm::FunctionType::get(returnType, false);
-}
+using namespace LLVM;
 
-LLVM::FunctionType::FunctionType(LLVM::Type^ returnType, ...array<LLVM::Type^>^ argumentTypes)
+static std::vector<llvm::Type*> toVector(array<LLVM::Type^>^ input)
 {
-	std::vector<llvm::Type*> types;
+    std::vector<llvm::Type*> result;
 
-	for(int i = 0; i < argumentTypes->Length; i++)
+	for(int i = 0; i < input->Length; i++)
 	{
-		types.push_back(argumentTypes[i]);
-	}
+		result.push_back(input[i]->Native);
+    }
 
-	this->type = llvm::FunctionType::get(returnType, makeArrayRef(types), false);
+    return result;
 }
 
-llvm::FunctionType* LLVM::FunctionType::GetNativeType()
+FunctionType::FunctionType(LLVM::Type^ returnType)
+    : Type(llvm::FunctionType::get(returnType, false))
 {
-	return this->type;
+}
+
+FunctionType::FunctionType(LLVM::Type^ returnType, ...array<LLVM::Type^>^ argumentTypes)
+    : Type(llvm::FunctionType::get(returnType, toVector(argumentTypes), false))
+{
 }

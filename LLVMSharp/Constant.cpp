@@ -5,41 +5,38 @@
 #include "Value.h"
 
 LLVM::Constant::Constant(LLVM::LLVMContext^ context, UInt32 bits, UInt64 value)
+    : Value(llvm::ConstantInt::get(context, llvm::APInt(bits, value)))
 {
-	this->constant = llvm::ConstantInt::get(
-		context,
-		llvm::APInt(bits, value));
 }
 
 LLVM::Constant::Constant(LLVM::LLVMContext^ context, String^ value)
-{
-	this->constant = llvm::ConstantDataArray::getString(
-		context,
+    : Value(llvm::ConstantDataArray::getString(context,
 		ToUnmanagedString(value),
-		true);
+		true))
+{
 }
 
 LLVM::Constant::Constant(LLVM::LLVMContext^ context, String^ value, bool isNullTerminated)
-{
-	this->constant = llvm::ConstantDataArray::getString(
+    : Value(llvm::ConstantDataArray::getString(
 		context,
 		ToUnmanagedString(value),
-		isNullTerminated);
+		isNullTerminated))
+{
 }
 
 LLVM::Constant::Constant(LLVM::Type^ type)
+    : Value(llvm::ConstantExpr::getSizeOf(type))
 {
-	this->constant = llvm::ConstantExpr::getSizeOf(type);
 }
 
 LLVM::Type^ LLVM::Constant::GetType()
 {
-	return gcnew LLVM::Type(this->constant->getType());
+	return gcnew LLVM::Type(this->Native->getType());
 }
 
-void LLVM::Constant::TruncOrBitCast(LLVM::Type^ type)
+LLVM::Constant^ LLVM::Constant::TruncOrBitCast(LLVM::Type^ type)
 {
-	this->constant = llvm::ConstantExpr::getTruncOrBitCast(this->constant, type);
+    return gcnew LLVM::Constant(llvm::ConstantExpr::getTruncOrBitCast((llvm::Constant*)this->Native, type));
 }
 
 LLVM::Constant::operator LLVM::Constant^(LLVM::Value^ value)
@@ -49,15 +46,10 @@ LLVM::Constant::operator LLVM::Constant^(LLVM::Value^ value)
 
 LLVM::Constant::operator LLVM::Value^(LLVM::Constant^ constant)
 {
-	return gcnew LLVM::Value(constant->GetNativeConstant());
+	return gcnew LLVM::Value(constant);
 }
 
 LLVM::Constant::Constant(llvm::Constant* constant)
+    : Value(constant)
 {
-	this->constant = constant;
-}
-
-llvm::Constant* LLVM::Constant::GetNativeConstant()
-{
-	return this->constant;
 }

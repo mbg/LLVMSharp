@@ -8,7 +8,7 @@ using namespace LLVM;
 
 LLVM::Function::Function(Module^ module, String^ name, FunctionType^ type, LinkageType linkage)
     : LLVM::Wrapper<llvm::Function*>(llvm::Function::Create(
-		type->GetNativeType(), 
+        (llvm::FunctionType*)type->Native, 
 		(llvm::GlobalValue::LinkageTypes)linkage, 
 		ToUnmanagedString(name), 
 		module))
@@ -17,7 +17,7 @@ LLVM::Function::Function(Module^ module, String^ name, FunctionType^ type, Linka
 
 Function::Function(Module^ module, String^ name, FunctionType^ type)
     : LLVM::Wrapper<llvm::Function*>(llvm::Function::Create(
-		type->GetNativeType(), 
+		(llvm::FunctionType*)type->Native, 
         (llvm::GlobalValue::LinkageTypes)LinkageType::ExternalLinkage, 
 		ToUnmanagedString(name), 
 		module))
@@ -42,7 +42,7 @@ bool LLVM::Function::Empty::get()
 
 LLVM::Function::operator LLVM::Function^(LLVM::Constant^ constant)
 {
-	return gcnew LLVM::Function(llvm::cast<llvm::Function>(constant->GetNativeConstant()));
+	return gcnew LLVM::Function(llvm::cast<llvm::Function>(constant->Native));
 }
 
 LLVM::Function::operator LLVM::Constant^(LLVM::Function^ function)
