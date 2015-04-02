@@ -34,5 +34,23 @@ namespace LLVM
         AllocaInstruction^ CreateAlloca(Type^ type, Value^ arraySize);
         AllocaInstruction^ CreateAlloca(Type^ type, String^ name);
         AllocaInstruction^ CreateAlloca(Type^ type, Value^ arraySize, String^ name);
+
+        // floating point instructions
+        Value^ CreateFAdd(Value^ lhs, Value^ rhs, String^ name);
+        Value^ CreateFSub(Value^ lhs, Value^ rhs, String^ name);
+        Value^ CreateFMul(Value^ lhs, Value^ rhs, String^ name);
+        Value^ CreateFDiv(Value^ lhs, Value^ rhs, String^ name);
+        Value^ CreateFRem(Value^ lhs, Value^ rhs, String^ name);
+        Value^ CreateFNeg(Value^ val, String^ name);
+        /// <summary>
+        /// 
+        /// </summary>
+        Value^ CreateFPToUI(Value^ val, Type^ destType, String^ name);
+        Value^ CreateFPToSI(Value^ val, Type^ destType, String^ name);
+        Value^ CreateUIToFP(Value^ val, Type^ destType, String^ name);
+        Value^ CreateSIToFP(Value^ val, Type^ destType, String^ name);
+        Value^ CreateFPTrunc(Value^ val, Type^ destType, String^ name);
+        Value^ CreateFPExt(Value^ val, Type^ destType, String^ name);
+        Value^ CreateFCmp(Predicate pred, Value^ lhs, Value^ rhs, String^ name);
 	};
 }

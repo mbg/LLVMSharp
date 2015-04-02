@@ -142,3 +142,68 @@ LLVM::AllocaInstruction^ LLVM::IRBuilder::CreateAlloca(Type^ type, Value^ arrayS
 {
     return gcnew AllocaInstruction(this->builder->CreateAlloca(type, arraySize, ToUnmanagedString(name)));
 }
+
+LLVM::Value^ LLVM::IRBuilder::CreateFAdd(Value^ lhs, Value^ rhs, String^ name)
+{
+    return gcnew Value(this->builder->CreateFAdd(lhs, rhs, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateFSub(Value^ lhs, Value^ rhs, String^ name)
+{
+    return gcnew Value(this->builder->CreateFSub(lhs, rhs, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateFMul(Value^ lhs, Value^ rhs, String^ name)
+{
+    return gcnew Value(this->builder->CreateFMul(lhs, rhs, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateFDiv(Value^ lhs, Value^ rhs, String^ name)
+{
+    return gcnew Value(this->builder->CreateFDiv(lhs, rhs, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateFRem(Value^ lhs, Value^ rhs, String^ name)
+{
+    return gcnew Value(this->builder->CreateFRem(lhs, rhs, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateFNeg(Value^ val, String^ name)
+{
+    return gcnew Value(this->builder->CreateFNeg(val, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateFPToUI(Value^ val, Type^ destType, String^ name)
+{
+    return gcnew Value(this->builder->CreateFPToUI(val, destType, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateFPToSI(Value^ val, Type^ destType, String^ name)
+{
+    return gcnew Value(this->builder->CreateFPToSI(val, destType, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateUIToFP(Value^ val, Type^ destType, String^ name)
+{
+    return gcnew Value(this->builder->CreateUIToFP(val, destType, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateSIToFP(Value^ val, Type^ destType, String^ name)
+{
+    return gcnew Value(this->builder->CreateSIToFP(val, destType, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateFPTrunc(Value^ val, Type^ destType, String^ name)
+{
+    return gcnew Value(this->builder->CreateFPTrunc(val, destType, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateFPExt(Value^ val, Type^ destType, String^ name)
+{
+    return gcnew Value(this->builder->CreateFPExt(val, destType, ToUnmanagedString(name)));
+}
+
+LLVM::Value^ LLVM::IRBuilder::CreateFCmp(Predicate pred, Value^ lhs, Value^ rhs, String^ name)
+{
+    return gcnew Value(this->builder->CreateFCmp((llvm::CmpInst::Predicate)pred, lhs, rhs, ToUnmanagedString(name)));
+}
