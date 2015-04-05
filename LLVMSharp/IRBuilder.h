@@ -2,6 +2,7 @@
 #pragma once
 
 #include "LLVM.h"
+#include "BranchInstruction.h"
 
 using namespace System;
 
@@ -23,7 +24,8 @@ namespace LLVM
 		Value^ CreateGEP(Value^ pointer, Value^ index, String^ name);
 		Value^ CreateTrunc(Value^ value, Type^ type, String^ name);
 		Value^ CreateSignExtend(Value^ value, Type^ type, String^ name);
-		void CreateBranch(BasicBlock^ target);
+		BranchInstruction^ CreateBranch(BasicBlock^ target);
+        BranchInstruction^ CreateCondBranch(Value^ cond, BasicBlock^ trueBranch, BasicBlock^ falseBranch);
 		void CreateCall(Value^ target);
 		CallInstruction^ CreateCall(Value^ target, String^ name);
 		CallInstruction^ CreateCall(Value^ target, ...array<Value^>^ arguments);

@@ -70,9 +70,14 @@ LLVM::Value^ LLVM::IRBuilder::CreateSignExtend(LLVM::Value^ value, LLVM::Type^ t
 		ToUnmanagedString(name)));
 }
 
-void LLVM::IRBuilder::CreateBranch(LLVM::BasicBlock^ target)
+LLVM::BranchInstruction^ LLVM::IRBuilder::CreateBranch(LLVM::BasicBlock^ target)
 {
-	this->builder->CreateBr(target);
+	return gcnew BranchInstruction(this->builder->CreateBr(target));
+}
+
+LLVM::BranchInstruction^ LLVM::IRBuilder::CreateCondBranch(Value^ cond, BasicBlock^ trueBranch, BasicBlock^ falseBranch)
+{
+    return gcnew BranchInstruction(this->builder->CreateCondBr(cond, trueBranch, falseBranch));
 }
 
 void LLVM::IRBuilder::CreateCall(LLVM::Value^ target)
