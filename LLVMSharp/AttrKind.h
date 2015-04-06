@@ -1,0 +1,51 @@
+#pragma once
+
+namespace LLVM
+{
+    public enum class AttrKind
+    {
+        None, 
+        Alignment, 
+        AlwaysInline, 
+        Builtin, 
+        ByVal, 
+        InAlloca, 
+        Cold, 
+        InlineHint, 
+        InReg, 
+        JumpTable, 
+        MinSize, 
+        Naked, 
+        Nest, 
+        NoAlias, 
+        NoBuiltin, 
+        NoCapture, 
+        NoDuplicate, 
+        NoImplicitFloat, 
+        NoInline, 
+        NonLazyBind, 
+        NonNull, 
+        Dereferenceable, 
+        NoRedZone, 
+        NoReturn, 
+        NoUnwind, 
+        OptimizeForSize, 
+        OptimizeNone, 
+        ReadNone, 
+        ReadOnly, 
+        Returned, 
+        ReturnsTwice, 
+        SExt, 
+        StackAlignment, 
+        StackProtect, 
+        StackProtectReq, 
+        StackProtectStrong, 
+        StructRet, 
+        SanitizeAddress, 
+        SanitizeThread, 
+        SanitizeMemory, 
+        UWTable, 
+        ZExt, 
+        EndAttrKinds 
+    };
+}

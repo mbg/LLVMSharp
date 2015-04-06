@@ -80,6 +80,16 @@ LLVM::BranchInstruction^ LLVM::IRBuilder::CreateCondBranch(Value^ cond, BasicBlo
     return gcnew BranchInstruction(this->builder->CreateCondBr(cond, trueBranch, falseBranch));
 }
 
+LLVM::IndirectBrInst^ LLVM::IRBuilder::CreateIndirectBr(Value^ addr)
+{
+    return this->CreateIndirectBr(addr, 10);
+}
+
+LLVM::IndirectBrInst^ LLVM::IRBuilder::CreateIndirectBr(Value^ addr, unsigned numDests)
+{
+    return gcnew IndirectBrInst(this->builder->CreateIndirectBr(addr, numDests));
+}
+
 void LLVM::IRBuilder::CreateCall(LLVM::Value^ target)
 {
 	this->builder->CreateCall(

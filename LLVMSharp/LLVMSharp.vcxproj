@@ -88,6 +88,7 @@
     <ClCompile Include="FunctionType.cpp" />
     <ClCompile Include="GlobalValue.cpp" />
     <ClCompile Include="GlobalVariable.cpp" />
+    <ClCompile Include="IndirectBrInst.cpp" />
     <ClCompile Include="Instruction.cpp" />
     <ClCompile Include="IntegerCompareInstruction.cpp" />
     <ClCompile Include="IntegerType.cpp" />
@@ -103,6 +104,7 @@
     <ClCompile Include="PointerType.cpp" />
     <ClCompile Include="ReturnInstruction.cpp" />
     <ClCompile Include="TargetRegistry.cpp" />
+    <ClCompile Include="TerminatorInst.cpp" />
     <ClCompile Include="Triple.cpp" />
     <ClCompile Include="Type.cpp" />
     <ClCompile Include="Value.cpp" />
@@ -113,6 +115,7 @@
     <ClInclude Include="APFloat.h" />
     <ClInclude Include="ArchType.h" />
     <ClInclude Include="ArrayType.h" />
+    <ClInclude Include="AttrKind.h" />
     <ClInclude Include="BasicBlock.h" />
     <ClInclude Include="BlockAddress.h" />
     <ClInclude Include="BranchInstruction.h" />
@@ -126,6 +129,7 @@
     <ClInclude Include="FunctionType.h" />
     <ClInclude Include="GlobalValue.h" />
     <ClInclude Include="GlobalVariable.h" />
+    <ClInclude Include="IndirectBrInst.h" />
     <ClInclude Include="Instruction.h" />
     <ClInclude Include="InstructionType.h" />
     <ClInclude Include="IntegerCompareInstruction.h" />
@@ -148,6 +152,7 @@
     <ClInclude Include="Predicate.h" />
     <ClInclude Include="ReturnInstruction.h" />
     <ClInclude Include="TargetRegistry.h" />
+    <ClInclude Include="TerminatorInst.h" />
     <ClInclude Include="Triple.h" />
     <ClInclude Include="Type.h" />
     <ClInclude Include="Value.h" />

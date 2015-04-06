@@ -3,6 +3,7 @@
 
 #include "LLVM.h"
 #include "BranchInstruction.h"
+#include "IndirectBrInst.h"
 
 using namespace System;
 
@@ -26,6 +27,8 @@ namespace LLVM
 		Value^ CreateSignExtend(Value^ value, Type^ type, String^ name);
 		BranchInstruction^ CreateBranch(BasicBlock^ target);
         BranchInstruction^ CreateCondBranch(Value^ cond, BasicBlock^ trueBranch, BasicBlock^ falseBranch);
+        IndirectBrInst^ CreateIndirectBr(Value^ addr);
+        IndirectBrInst^ CreateIndirectBr(Value^ addr, unsigned numDests);
 		void CreateCall(Value^ target);
 		CallInstruction^ CreateCall(Value^ target, String^ name);
 		CallInstruction^ CreateCall(Value^ target, ...array<Value^>^ arguments);
