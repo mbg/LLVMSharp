@@ -3,7 +3,7 @@
 
 namespace LLVM
 {
-	public enum class Predicate
+    public enum class Predicate
 	{
 		AlwaysFalse = 0,
 		OrderedEqual = 1,
