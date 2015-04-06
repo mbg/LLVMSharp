@@ -77,6 +77,7 @@
     <ClCompile Include="APFloat.cpp" />
     <ClCompile Include="ArrayType.cpp" />
     <ClCompile Include="BasicBlock.cpp" />
+    <ClCompile Include="BlockAddress.cpp" />
     <ClCompile Include="BranchInstruction.cpp" />
     <ClCompile Include="CallInstruction.cpp" />
     <ClCompile Include="CompareInstruction.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="ArchType.h" />
     <ClInclude Include="ArrayType.h" />
     <ClInclude Include="BasicBlock.h" />
+    <ClInclude Include="BlockAddress.h" />
     <ClInclude Include="BranchInstruction.h" />
     <ClInclude Include="CallInstruction.h" />
     <ClInclude Include="CompareInstruction.h" />
