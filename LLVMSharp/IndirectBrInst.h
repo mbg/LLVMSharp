@@ -13,6 +13,8 @@ namespace LLVM
             Value^ get();
             void set(Value^ val);
         };
+
+        void addDestination(BasicBlock^ Dest);
     internal:
         IndirectBrInst(llvm::IndirectBrInst* inst) : TerminatorInst(inst) {};
     };
