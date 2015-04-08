@@ -117,9 +117,6 @@
     <ClCompile Include="PassManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AllocaInstruction.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ArrayType.cpp">
       <Filter>Source Files\Types</Filter>
     </ClCompile>
@@ -138,7 +135,13 @@
     <ClCompile Include="TerminatorInst.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AllocaInstruction.cpp">
+      <Filter>Source Files\Instructions</Filter>
+    </ClCompile>
     <ClCompile Include="IndirectBrInst.cpp">
+      <Filter>Source Files\Instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="LLVMAttribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -257,9 +260,6 @@
     <ClInclude Include="PassManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AllocaInstruction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ArrayType.h">
       <Filter>Header Files\Types</Filter>
     </ClInclude>
@@ -281,7 +281,13 @@
     <ClInclude Include="TerminatorInst.h">
       <Filter>Header Files\Instructions</Filter>
     </ClInclude>
+    <ClInclude Include="AllocaInstruction.h">
+      <Filter>Header Files\Instructions</Filter>
+    </ClInclude>
     <ClInclude Include="IndirectBrInst.h">
+      <Filter>Header Files\Instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="LLVMAttribute.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

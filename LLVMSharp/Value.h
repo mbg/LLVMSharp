@@ -9,7 +9,14 @@ namespace LLVM
 {
     public ref class Value : Wrapper<llvm::Value*>
 	{
-	private:
+	public:
+        property String^ Name
+        {
+            String^ get();
+            void set(String^ name);
+        }
+
+        void Dump();
 	internal:
 		Value(llvm::Value* value) : Wrapper(value) { };
 	};

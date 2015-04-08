@@ -95,6 +95,7 @@
     <ClCompile Include="Interop.cpp" />
     <ClCompile Include="Intrinsic.cpp" />
     <ClCompile Include="IRBuilder.cpp" />
+    <ClCompile Include="LLVMAttribute.cpp" />
     <ClCompile Include="LLVMContext.cpp" />
     <ClCompile Include="LoadInstruction.cpp" />
     <ClCompile Include="Module.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="IRBuilder.h" />
     <ClInclude Include="LinkageType.h" />
     <ClInclude Include="LLVM.h" />
+    <ClInclude Include="LLVMAttribute.h" />
     <ClInclude Include="LLVMContext.h" />
     <ClInclude Include="LoadInstruction.h" />
     <ClInclude Include="Module.h" />
