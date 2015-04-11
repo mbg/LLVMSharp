@@ -45,5 +45,7 @@ namespace LLVM
 		static PointerType^ GetInteger8PointerType(LLVM::LLVMContext^ context, unsigned address);
 
 		bool CanLosslesslyBitCastTo(Type^ type);
+
+        void Dump();
 	};
 }

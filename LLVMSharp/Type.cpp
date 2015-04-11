@@ -113,3 +113,8 @@ bool LLVM::Type::CanLosslesslyBitCastTo(LLVM::Type^ type)
 {
 	return this->Native->canLosslesslyBitCastTo(type);
 }
+
+void LLVM::Type::Dump()
+{
+    this->Native->dump();
+}

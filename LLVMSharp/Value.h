@@ -14,7 +14,12 @@ namespace LLVM
         {
             String^ get();
             void set(String^ name);
-        }
+        };
+
+        property Type^ Type
+        {
+            LLVM::Type^ get();
+        };
 
         void Dump();
 	internal:

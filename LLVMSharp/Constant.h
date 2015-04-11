@@ -14,11 +14,11 @@ namespace LLVM
 		Constant(LLVMContext^ context, UInt32 bits, UInt64 value);
 		Constant(LLVMContext^ context, String^ value);
 		Constant(LLVMContext^ context, String^ value, bool isNullTerminated);
-		Constant(Type^ type);
+		Constant(LLVM::Type^ type);
 
-		Type^ GetType();
+		LLVM::Type^ GetType();
 
-		Constant^ TruncOrBitCast(Type^ type);
+		Constant^ TruncOrBitCast(LLVM::Type^ type);
 
 		static explicit operator Constant^ (Value^ constant);
 		static operator Value^ (Constant^ function);

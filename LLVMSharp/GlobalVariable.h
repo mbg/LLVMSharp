@@ -12,6 +12,6 @@ namespace LLVM
     public ref class GlobalVariable : Constant
 	{
 	public:
-		GlobalVariable(Module^ module, Type^ type, bool constant, LinkageType linkage, Constant^ value, String^ name);
+		GlobalVariable(Module^ module, LLVM::Type^ type, bool constant, LinkageType linkage, Constant^ value, String^ name);
 	};
 }
